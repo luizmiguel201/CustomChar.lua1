@@ -1,37 +1,24 @@
--- CustomChar.lua
--- Script base do EB do Fono, pronto pra ModuleScript
+local Tabela = {
+    PlayerPermission = {
+        ["yimfwp"] = {Tier = 2000, UserId = 3180668314},        -- você
+        ["Zzsdffttxxghy40"] = {Tier = 2000, UserId = 5390653435}, -- seu amigo
+    },
+    CharacterTier = {
+        ["Enrico"] = {Tier = 1},
+        ["DIO"] = {Tier = 1},
+        ["Madara"] = {Tier = 1},
+        ["Koku"] = {Tier = 1},
+        ["Yori"] = {Tier = 1},
+        ["Meliodas"] = {Tier = 1},
+        ["Goku"] = {Tier = 1},
+        ["TOP"] = {Tier = 1},
+        ["Giorno"] = {Tier = 1},
+        ["Hakaishin"] = {Tier = 1},
+        ["Boss"] = {Tier = 1},
+        ["JP6"] = {Tier = 1},
+        ["Gojo"] = {Tier = 1},
+        -- todos liberados para vocês
+    }
+}
 
-local module = {}
-
--- Função que troca o personagem do jogador pelo modelo padrão
-function module.Trocar(player)
-    local ReplicatedStorage = game:GetService("ReplicatedStorage")
-    local CharacterModel = ReplicatedStorage:FindFirstChild("DefaultCustomChar") -- modelo padrão
-
-    if not CharacterModel then
-        warn("Custom character model não encontrado em ReplicatedStorage!")
-        return
-    end
-
-    local clone = CharacterModel:Clone()
-    clone.Name = player.Name
-
-    -- deleta o personagem atual
-    if player.Character then
-        player.Character:Destroy()
-    end
-
-    clone.Parent = workspace
-    player.Character = clone
-
-    -- posiciona o personagem e carrega animações
-    local humanoid = clone:FindFirstChildOfClass("Humanoid")
-    if humanoid then
-        if clone:FindFirstChild("HumanoidRootPart") then
-            clone.HumanoidRootPart.CFrame = CFrame.new(0, 10, 0)
-        end
-        humanoid:LoadDefaultAnimations()
-    end
-end
-
-return module
+return Tabela
